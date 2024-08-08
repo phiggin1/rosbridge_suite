@@ -299,10 +299,12 @@ def _to_object_inst(msg, rostype, roottype, inst, stack):
 
         field_rostype = inst_fields[field_name]
         field_inst = getattr(inst, field_name)
-
-        field_value = _to_inst(msg[field_name], field_rostype,
+        #Hack fix 
+        if (field_rostype != "time"):
+            field_value = _to_inst(msg[field_name], field_rostype,
                     roottype, field_inst, field_stack)
 
-        setattr(inst, field_name, field_value)
+            setattr(inst, field_name, field_value)
+
 
     return inst
